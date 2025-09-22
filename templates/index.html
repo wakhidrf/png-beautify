@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potong & Sesuaikan Ukuran PNG</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; background-color: #f0f0f0; }
+        .container { background: white; padding: 2em; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #333; }
+        form { margin-top: 1em; display: flex; flex-direction: column; align-items: center; }
+        .input-group { margin-bottom: 1em; text-align: left; }
+        label { display: block; margin-bottom: 0.5em; font-weight: bold; }
+        input[type="file"] { border: 1px solid #ccc; padding: 10px; border-radius: 5px; width: 100%; box-sizing: border-box; }
+        .size-inputs { display: flex; justify-content: space-between; gap: 10px; }
+        .size-inputs input { width: 100px; text-align: center; }
+        button { background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 1em; }
+        button:hover { background-color: #0056b3; }
+        .download-link { margin-top: 2em; }
+        .download-link a { background-color: #28a745; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .download-link a:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Potong & Sesuaikan Ukuran PNG</h1>
+        <p>Unggah banyak gambar PNG sekaligus untuk diproses dan diunduh sebagai file ZIP.</p>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="input-group">
+                <label for="file">Pilih file PNG:</label>
+                <input type="file" name="files" id="file" accept="image/png" multiple>
+            </div>
+            <div class="input-group">
+                <label>Ukuran Target (Pixel):</label>
+                <p style="font-size: 0.9em; margin: 0 0 5px 0;">Isi salah satu untuk mempertahankan rasio aspek.</p>
+                <div class="size-inputs">
+                    <div>
+                        <input type="text" name="width" placeholder="Lebar">
+                    </div>
+                    <div>
+                        <input type="text" name="height" placeholder="Tinggi">
+                    </div>
+                </div>
+            </div>
+            <button type="submit">Proses & Unduh ZIP</button>
+        </form>
+
+        {% if download_url %}
+            <div class="download-link">
+                <p>Gambar Anda sudah siap:</p>
+                <a href="{{ download_url }}">Unduh Semua (.zip)</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
